@@ -4,11 +4,11 @@ setup:
 	mkdir -p build
 	mkdir -p working
 
-build/rootfs/bin/proot: setup build/rootfs
+build/rootfs/bin/proot:
 	(cd PRoot/src; make)
 	cp PRoot/src/proot build/rootfs/bin/proot
 
-build/rootfs: setup
+build/rootfs:
 	./scripts/download-airootfs.sh
 	./scripts/unpack-airootfs.sh
 	echo "nameserver 8.8.8.8" > build/rootfs/etc/resolv.conf
