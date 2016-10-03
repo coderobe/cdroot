@@ -8,7 +8,7 @@ build/rootfs/bin/proot:
 	(cd PRoot/src; make)
 	cp PRoot/src/proot build/rootfs/bin/proot
 
-build/rootfs:
+cdroot.tar.gz:
 	./scripts/download-airootfs.sh
 	./scripts/unpack-airootfs.sh
 	echo "nameserver 8.8.8.8" > build/rootfs/etc/resolv.conf
@@ -22,3 +22,4 @@ clean-working:
 
 clean: clean-proot clean-working
 	sudo rm -rf build
+	rm cdroot.tar.gz
