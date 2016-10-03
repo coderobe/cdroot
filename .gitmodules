@@ -1,0 +1,3 @@
+[submodule "PRoot"]
+	path = PRoot
+	url = https://github.com/proot-me/PRoot
