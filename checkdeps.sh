@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
+ERR=0
+
+seterr () {
+  ERR=1
+}
+
 red () {
   echo -e "\e[31m$1\e[0m"
 }
@@ -15,9 +21,19 @@ depcheck () {
       echo -e "$(green installed)"
     else
       echo -e "$(red missing)"
+      seterr
   fi
 }
 
-for line in $(cat Makedepends)
-  do echo $(depcheck $line)
-done
+bulkcheck () {
+  for dep in $@
+    do echo -e "$(depcheck $dep)"
+  done
+}
+
+if [ -n "$1" ]
+  then echo -e "$(bulkcheck $@)"
+  else echo -e "$(bulkcheck $(cat Makedepends))"
+fi
+
+exit $ERR
